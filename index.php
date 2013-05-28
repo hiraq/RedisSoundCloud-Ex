@@ -36,9 +36,7 @@ if ($phpVersion < 5.3) {
     require_once(PATH_CORE.'Response.php');    
     require_once(PATH_CORE.'Assets.php');    
     require_once(PATH_CORE.'Exception/PageException.php');
-    require_once(PATH_CORE.'Exception/SystemException.php');      
-    
-    ob_start();
+    require_once(PATH_CORE.'Exception/SystemException.php');        
     
     $debug = new \Core\Debug();
     $debug->init();
