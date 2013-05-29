@@ -7,6 +7,7 @@ define('ROOT',__DIR__);
 define('DS',DIRECTORY_SEPARATOR);
 define('LIB',ROOT.DS.'lib'.DS);
 define('INC',ROOT.DS.'includes'.DS);
+define('CONFIG',ROOT.DS.'configs'.DS);
 
 /*
  * paths
@@ -25,6 +26,8 @@ define('DEBUG_LEVEL',1);
 $phpVersion = floatval(PHP_VERSION);
 if ($phpVersion < 5.3) {
     echo 'This example application need php version at least 5.3';
+} elseif (!class_exists('Redis')) {
+    echo 'Please install php extension for redis - https://github.com/nicolasff/phpredis';
 } else {
     
     /*
@@ -35,8 +38,19 @@ if ($phpVersion < 5.3) {
     require_once(PATH_CORE.'Request.php');
     require_once(PATH_CORE.'Response.php');    
     require_once(PATH_CORE.'Assets.php');    
+    require_once(PATH_CORE.'Config.php');    
     require_once(PATH_CORE.'Exception/PageException.php');
-    require_once(PATH_CORE.'Exception/SystemException.php');        
+    require_once(PATH_CORE.'Exception/SystemException.php');   
+    
+    /*
+     * load redis
+     */
+    require_once(PATH_REDIS.'Data.php');
+    
+    /*
+     * load SoundCloud sdk
+     */
+    require_once(PATH_SOUNDCLOUD.'Soundcloud.php');
     
     $debug = new \Core\Debug();
     $debug->init();
@@ -53,12 +67,14 @@ if ($phpVersion < 5.3) {
     try {
         
         $response = new \Core\Response($request);
-        $response->listen();  
+        $response->listen();                          
         
     }catch(\Core\Exception\PageException $e) {//page not found
         echo '<h1>'.$e->getMessage().'</h1>';
     }catch(\Core\Exception\SystemException $e) {//system error
         echo '<h1>System error: '.$e->getMessage().'</h1>';
+    }catch(Exception $e) {
+        echo '<h1>Exception: '.$e->getMessage().'</h1>';
     }
     
 }

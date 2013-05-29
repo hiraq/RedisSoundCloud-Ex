@@ -29,13 +29,17 @@ namespace Core {
         }
         
         /**
-         * Load 
+         * load js
          * @param string $js
          */
         static public function js($js) {
             echo URI_PUBLIC.'js/'.$js;
         }
         
+        /**
+         * load image
+         * @param string $img
+         */
         static public function image($img) {
             echo URI_PUBLIC.'images/'.$img;
         }

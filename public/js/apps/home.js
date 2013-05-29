@@ -4,9 +4,11 @@ var home = angular.module('home',['ngResource']);
 
 home.controller('HomeController',['$scope','$http',function($scope,$http) {
     
-    $scope.terms = Array.create();   
+    $scope.musics = Array.create();   
     $scope.showForm = true;
     $scope.showProgress = 'hide';
+    $scope.showMusic = false;
+    $scope.play = '';
     
     $scope.submit = function($event) {
         
@@ -38,7 +40,12 @@ home.controller('HomeController',['$scope','$http',function($scope,$http) {
             $scope.query = '';
             $scope.showProgress = 'hide';
             
-            console.log(data);
+            $scope.musics.add(data);
+            
+            var random = $scope.musics.sample();
+            
+            $scope.showMusic = true;
+            $scope.play = random.embed;            
             
         }).error(function(data,status) {
             alert(data);

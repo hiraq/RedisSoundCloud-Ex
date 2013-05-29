@@ -38,14 +38,17 @@
         <div class='row-fluid'>
             <div class='span3'></div>            
             <div class="span4 well offset1">
-                search term: <strong ng-bind="query"></strong>
-                
+                <strong ng-bind="query"></strong>                
                 <span ng-switch on="showProgress">
                     <span ng-switch-when="show">... connecting to soundcloud <img src="<?php echo \Core\Assets::image('ajax-loader.gif') ?>" /></span>
                 </span>
                 
             </div>
             <div class='span5'></div>
+        </div>
+        
+        <div class="row-fluid" ng-show="showMusic">
+            <div ng-bind-html-unsafe="play"></div>
         </div>
 
     </div> <!-- /container -->          

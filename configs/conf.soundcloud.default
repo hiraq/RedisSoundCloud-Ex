@@ -1,0 +1,6 @@
+<?php
+
+return array(
+    'client_id' => 'SOUNDCLOUD_API_CLIENT_ID',
+    'client_secret' => 'SOUNDCLOUD_API_CLIENT_SECRET'
+);
