@@ -7,6 +7,6 @@ Requirements
 =============
 
 1. PHP Version: >= 5.3
-2. Redis
+2. [Redis](http://redis.io/download)
 3. [SoundCloud API Key](http://developers.soundcloud.com)
 4. [php-redis](https://github.com/nicolasff/phpredis)
