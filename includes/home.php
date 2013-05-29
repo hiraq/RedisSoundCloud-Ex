@@ -28,7 +28,7 @@
                 <form ng-show="showForm" class="form-inline" action="<?php echo \Core\Request::setAction('search'); ?>" method="post" name="formsearch">                    
                     <fieldset>                                                
                         <input type="text" name="query" ng-model="query" class="input-xlarge" placeholder="keyword...">                        
-                        <input type="submit" class="btn" id="submit" value="Search and Save" name="submit" ng-click="submit($event)" />
+                        <input type="submit" class="btn" id="submit" value="Search and Play" name="submit" ng-click="submit($event)" />
                     </fieldset>
                 </form>
             </div>
