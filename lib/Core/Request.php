@@ -83,7 +83,24 @@ namespace Core {
             
             return false;
             
-        }                
+        }   
+        
+        /**
+         * Check if current request is ajax
+         * @return boolean
+         */
+        static public function isAjaxRequest() {
+            
+            /*
+             * only set on ajax request
+             */
+            if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) 
+                    && $_SERVER['HTTP_X_REQUESTED_WITH']) {
+                return true;
+            }
+            
+            return false;
+        }
         
     }
     

@@ -5,7 +5,7 @@ namespace Core {
     final class Assets {
         
         /**
-         * load css file
+         * load bootstrap css file
          * @param string $css
          */
         static public function bootstrapCss($css) {
@@ -13,7 +13,7 @@ namespace Core {
         }
         
         /**
-         * load js file
+         * load bootstrap js file
          * @param string $js
          */
         static public function bootstrapJs($js) {
@@ -21,11 +21,23 @@ namespace Core {
         }
         
         /**
-         * load image file
+         * load bootstrap image file
          * @param string $img
          */
         static public function bootstrapImg($img) {
             echo URI_PUBLIC.'bootstrap/img/'.$img;
+        }
+        
+        /**
+         * Load 
+         * @param string $js
+         */
+        static public function js($js) {
+            echo URI_PUBLIC.'js/'.$js;
+        }
+        
+        static public function image($img) {
+            echo URI_PUBLIC.'images/'.$img;
         }
         
     }
