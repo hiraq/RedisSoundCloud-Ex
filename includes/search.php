@@ -18,7 +18,7 @@ if (\Core\Request::isAjaxRequest()) {
     * search via soundcloud api
     */    
     $client = new \Services_Soundcloud($configs['client_id'],$configs['client_secret']);
-    $tracks = $client->get('tracks',array('q' => 'tiesto','limit' => 10));
+    $tracks = $client->get('tracks',array('q' => $query,'limit' => 10));
 
     $response = array();
     if ($tracks) {
