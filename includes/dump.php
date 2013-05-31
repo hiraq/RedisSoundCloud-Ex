@@ -4,6 +4,9 @@
 $redis = new \Redis\Data();       
 $data = $redis->getRedis()->lRange('terms',0,-1);
 
+/*
+ * dump data if exists
+ */
 if ($data) {
     
     $collections = array();    
@@ -31,6 +34,7 @@ if ($data) {
         );
     }
     
+    //dump variables
     \Core\Debug::vars($collections);
     
 } else {
