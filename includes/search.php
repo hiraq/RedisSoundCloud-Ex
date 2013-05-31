@@ -8,8 +8,11 @@ if (\Core\Request::isAjaxRequest()) {
     //setup redis
     $redis = new \Redis\Data();       
     
-    //make query as tag, increment count
-    $redis->getRedis()->incr($query);        
+    //make query as tag, count & update increment
+    $redis->getRedis()->incr($query);   
+    
+    //insert into search term list
+    $redis->getRedis()->rPush('terms',$query);
     
     //get soundcloud api id & secret
     $configs = \Core\Config::get('soundcloud');
@@ -20,12 +23,18 @@ if (\Core\Request::isAjaxRequest()) {
     $client = new \Services_Soundcloud($configs['client_id'],$configs['client_secret']);
     $tracks = $client->get('tracks',array('q' => $query,'limit' => 10));
 
-    $response = array();
+    $response = array();    
+    
     if ($tracks) {
 
-       $results = json_decode($tracks);              
+       $results = json_decode($tracks);   
+       $i=0;
+       $redis->getRedis()->set('total_'.$query,count($results));
+       
        foreach($results as $result) {
-
+       
+           $i++;
+           
            /*
             * get oembed data
             */
@@ -39,7 +48,21 @@ if (\Core\Request::isAjaxRequest()) {
            $response[] = array(
                'embed' => $oembed->html,
                'artwork' => $result['artwork_url']
-           );
+           );   
+           
+           /*
+            * setup results into hash
+            * using transactions
+            */           
+            $redis->getRedis()->multi()
+                    ->hMset($query.':'.$i,array(
+                        'embed' => $oembed->html,
+                        'artwork' => $result['artwork_url'],
+                        'title' => $result['title'],
+                        'permalink' => $result['permalink_url'],
+                        'genre' => $result['genre']
+                    ))
+                    ->exec();                              
 
        }
 
