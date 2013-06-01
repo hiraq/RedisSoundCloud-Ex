@@ -3,8 +3,7 @@
 var home = angular.module('home',['ngResource']);
 
 home.controller('HomeController',['$scope','$http',function($scope,$http) {
-    
-    $scope.musics = Array.create();   
+        
     $scope.showForm = true;
     $scope.showProgress = 'hide';
     $scope.showMusic = false;
@@ -39,7 +38,8 @@ home.controller('HomeController',['$scope','$http',function($scope,$http) {
             
             $scope.query = '';
             $scope.showProgress = 'hide';
-            
+                        
+            $scope.musics = Array.create();            
             $scope.musics.add(data);
             
             var random = $scope.musics.sample();
